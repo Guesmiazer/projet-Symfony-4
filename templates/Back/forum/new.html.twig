@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New Forum{% endblock %}
+
+{% block body %}
+<div style="display: flex; align-items: center; justify-content: center">
+
+    <h1>Create new Forum</h1>
+    <div class="card">
+            
+
+            
+      </div>
+
+    {{ include('back/forum/_form.html.twig') }}
+
+    <br>
+    <form>
+    <a class="btn btn-secondary" href="{{ path('back_forum_index') }}">back to list</a>
+    </form>
+  </div>
+    
+{% endblock %}

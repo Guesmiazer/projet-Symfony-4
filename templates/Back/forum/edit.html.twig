@@ -1,0 +1,13 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edit Forum{% endblock %}
+
+{% block body %}
+    <h1>Edit Forum</h1>
+
+    {{ include('back/forum/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="btn btn-secondary" href="{{ path('back_forum_index') }}">back to list</a>
+
+    {{ include('back/forum/_delete_form.html.twig') }}
+{% endblock %}

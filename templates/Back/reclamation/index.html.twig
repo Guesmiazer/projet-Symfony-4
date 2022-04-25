@@ -1,0 +1,80 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+
+<div class="col-lg-4">
+
+                            <div class="sidebar">
+
+                                <h3 class="sidebar-title">Rechercher</h3>
+                                        {{ form_start(form)}}
+                                        {{ form_row(form.q) }}
+
+                                        <button type="submit" class ="btn btn-primary w-100">Rechercher</button>
+
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+ 
+    <h1>Liste des Reclamations</h1>
+     <form>
+    <a class="bi bi-plus-circle-fill" href="{{ path('back_forum_new') }}"> Ajouter une reclamation</a>
+    </form>
+    
+    <br><br>
+    <div class="col-xxl-4 col-xl-12">
+
+            <div class="card info-card customers-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+    <table class="table table-borderless datatable dataTable-table table table-hover ">
+        <thead>
+            <tr>
+                <th>ID reclamation</th>
+                <th>ID utulisateur</th>
+                <th>Objet</th>
+                <th>Contenu reclamation</th>
+                <th>Type</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.idRec }}</td>
+                <td>{{ reclamation.idUtl }}</td>
+                <td>{{ reclamation.obj }}</td>
+                <td>{{ reclamation.rec }}</td>
+                <td>{{ reclamation.type }}</td>
+                <td>
+                    <form method="post" action="{{ path('back_reclamation_delete', {'idRec': reclamation.idRec}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <a class="btn btn-light bi bi-eye-fill" href="{{ path('back_reclamation_show', {'idRec': reclamation.idRec}) }}"></a>
+                    <a class="btn btn-warning bi bi-pencil-square" href="{{ path('back_reclamation_edit', {'idRec': reclamation.idRec}) }}"></a>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.idRec) }}">
+                    <button class="btn btn-danger bi bi-trash-fill"></button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

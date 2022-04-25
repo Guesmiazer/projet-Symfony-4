@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block content %}
+    <h1>Reclamation index</h1>
+      <form>
+    <a class="bi bi-plus-circle-fill" href="{{ path('app_reclamation_new') }}"> Ajouter une reclamation</a>
+    </form>
+<br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Reclamation</th>
+                <th>ID utulisateur</th>
+                <th>Objet</th>
+                <th>Contenu reclamation</th>
+                <th>Type</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.idRec }}</td>
+                <td>{{ reclamation.idUtl }}</td>
+                <td>{{ reclamation.obj }}</td>
+                <td>{{ reclamation.rec }}</td>
+                <td>{{ reclamation.type }}</td>
+                <td>
+                
+                 <form method="post" action="{{ path('app_reclamation_delete', {'idRec': reclamation.idRec}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                
+                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.idRec) }}">
+                    <a class="btn btn-light bi bi-eye-fill" href="{{ path('app_reclamation_show', {'idRec': reclamation.idRec}) }}"></a>
+                    <a class="btn btn-warning bi bi-pencil-square" href="{{ path('app_reclamation_edit', {'idRec': reclamation.idRec}) }}"></a>
+                    <button class="btn btn-danger bi bi-trash-fill"></button>
+                </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

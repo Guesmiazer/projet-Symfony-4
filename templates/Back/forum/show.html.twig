@@ -1,0 +1,40 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+    <h1>Forum</h1>
+
+    <table class="class="table table-borderless datatable dataTable-table table table-hover">
+        <tbody>
+            <tr>
+                <th>IdFrm</th>
+                <td>{{ forum.idFrm }}</td>
+            </tr>
+            <tr>
+                <th>IdUtl</th>
+                <td>{{ forum.idUtl }}</td>
+            </tr>
+            <tr>
+                <th>ContenuFrm</th>
+                <td>{{ forum.contenuFrm }}</td>
+            </tr>
+            <tr>
+                <th>Report</th>
+                <td>{{ forum.report }}</td>
+            </tr>
+            <tr>
+                <th>Likes</th>
+                <td>{{ forum.likes }}</td>
+            </tr>
+        </tbody>
+    </table>
+<form>
+    <a class="btn btn-warning" href="{{ path('back_forum_edit', {'idFrm': forum.idFrm}) }}">edit</a>
+    <a class="btn btn-secondary" href="{{ path('back_forum_index') }}">back to list</a>
+
+    
+</form>
+    {{ include('back/forum/_delete_form.html.twig') }}
+
+{% endblock %}

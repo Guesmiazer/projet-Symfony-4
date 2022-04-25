@@ -1,0 +1,44 @@
+{{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+{{ form_errors(form)}}
+    
+   
+
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">General Form Elements</h5>
+
+              <!-- General Form Elements -->
+              <form class="form-group">
+              
+                <div class="widget mb-3">
+            
+                <label for=""> ID utulisateur :</label>
+                <br>
+                  {{ form_widget(form.idUtl) }}
+                </div>
+                <div class="widget mb-3">
+                <label for=""> Objet :</label>
+                <br>
+                {{ form_widget(form.obj) }}
+                </div>
+                <div class="widgetw mb-3">
+                <label for=""> Votre Reclamation :</label>
+                <br>
+                   {{ form_widget(form.rec) }}
+                </div>
+                <div class="widget mb-3">
+                <label for=""> Type :</label>
+                <br>
+                 {{ form_widget(form.type) }}
+                </div>
+                
+
+
+              <!-- End General Form Elements -->
+
+            
+             <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+             </form>
+          
+            {{ form_end(form) }}
+            <br><br>

@@ -1,0 +1,71 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Forum index{% endblock %}
+
+{% block body %}
+    <h1>Liste des forum</h1>
+    <form>
+    <a class="bi bi-plus-circle-fill" href="{{ path('back_forum_new') }}"> Ajouter une poste</a>
+    </form>
+    
+<br> <br>
+    <div class="col-xxl-4 col-xl-12">
+
+            <div class="card info-card customers-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+                <table class="table table-borderless datatable dataTable-table table table-hover ">
+                <thead>
+                    <tr>
+                        <th>IdFrm</th>
+                        <th>IdUtl</th>
+                        <th>ContenuFrm</th>
+                        <th>Likes</th>
+                        <th>Report</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for forum in forums %}
+                    <tr>
+                        <td>{{ forum.idFrm }}</td>
+                        <td>{{ forum.idUtl }}</td>
+                        <td>{{ forum.contenuFrm }}</td>
+                        <td ><a class="btn bi bi-hand-thumbs-up" href="{{path('addlike',{'idFrm':forum.idFrm})}}" >{{ forum.likes }}</a> </td>
+                    
+                        <td><a class="btn bi bi-hand-thumbs-down-fill" href="{{path('adddislike',{'idFrm':forum.idFrm})}}">{{ forum.report }}</a></td>
+                        
+                        <td>
+                            <form method="post" action="{{ path('back_forum_delete', {'idFrm': forum.idFrm}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                              <a class="btn btn-light bi bi-eye-fill" href="{{ path('back_forum_show', {'idFrm': forum.idFrm}) }}"></a>
+                              <a class="btn btn-warning bi bi-pencil-square" href="{{ path('back_forum_edit', {'idFrm': forum.idFrm}) }}"></a>
+                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ forum.idFrm) }}">
+                             <button class="btn btn-danger bi bi-trash-fill"></button>
+                            </form>
+                            
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+     </div>
+
+{% endblock %}
+

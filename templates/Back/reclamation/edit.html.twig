@@ -1,0 +1,15 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edit Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Edit Reclamation</h1>
+
+    {{ include('back/reclamation/_form.html.twig', {'button_label': 'Update'}) }}
+    
+    {{ include('back/reclamation/_delete_form.html.twig') }}
+
+    <a class="btn btn-secondary" href="{{ path('back_reclamation_index') }}">back to list</a>
+
+    
+{% endblock %}
